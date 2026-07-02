@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5 East Apartments | Baton Rouge, LA</title>
+<meta name="description" content="5 East Apartment Homes offer the pleasure of personal privacy combined with convenience. Stylish 1, 2 and 3 bedroom apartments in Baton Rouge, LA — 3 miles from LSU.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --black:      #1A1A1A;
+    --black-deep: #0F0F0F;
+    --black-mid:  #2A2A2A;
+    --tan:        #CBB492;
+    --tan-light:  #DEC9A8;
+    --tan-pale:   #F5EFE6;
+    --offwhite:   #FAF8F5;
+    --offwhite-mid:#F0EBE3;
+    --warm-gray:  #8A8178;
+    --body:       #3A3530;
+    --white:      #FFFFFF;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: var(--offwhite); color: var(--black); overflow-x: hidden; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1rem 3rem; display: flex; align-items: center; justify-content: space-between; transition: background 0.3s ease, padding 0.3s ease; }
+  nav.scrolled { background: var(--black-deep); padding: 0.8rem 3rem; box-shadow: 0 1px 0 rgba(203,180,146,0.1); }
+  .nav-logo img { height: 56px; display: block; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.8); text-decoration: none; transition: color 0.2s; font-weight: 500; }
+  .nav-links a:hover { color: var(--tan-light); }
+  .nav-actions { display: flex; gap: 0.75rem; }
+  .btn-nav { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.55rem 1.25rem; cursor: pointer; font-family: 'Inter', sans-serif; font-weight: 500; border: none; transition: all 0.2s; text-decoration: none; display: inline-block; }
+  .btn-ghost { background: transparent; color: rgba(255,255,255,0.75); border: 1px solid rgba(255,255,255,0.25); }
+  .btn-ghost:hover { border-color: var(--tan); color: var(--tan); }
+  .btn-tan { background: var(--tan); color: var(--black-deep); font-weight: 600; }
+  .btn-tan:hover { background: var(--tan-light); }
+
+  /* HERO */
+  .hero { min-height: 100vh; position: relative; overflow: hidden; background: var(--black-deep); display: flex; align-items: flex-end; }
+  .hero-slideshow { position: absolute; inset: 0; }
+  .hero-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.2s ease; }
+  .hero-slide.active { opacity: 1; }
+  .hero-slide img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.55; }
+  .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(15,15,15,0.9) 0%, rgba(15,15,15,0.2) 60%, transparent 100%); }
+  .hero-content { position: relative; z-index: 2; padding: 0 3rem 6rem; max-width: 700px; }
+  .hero-eyebrow { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--tan); margin-bottom: 1.25rem; }
+  .hero-headline { font-family: 'Playfair Display', serif; font-size: clamp(3.5rem, 8vw, 6.5rem); font-weight: 400; line-height: 0.95; color: var(--white); margin-bottom: 1.5rem; }
+  .hero-headline .num { color: var(--tan); font-style: italic; }
+  .hero-sub { font-size: 1rem; color: rgba(255,255,255,0.55); font-weight: 300; line-height: 1.8; margin-bottom: 2.5rem; max-width: 480px; }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary { background: var(--tan); color: var(--black-deep); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 1rem 2rem; border: none; cursor: pointer; font-family: 'Inter', sans-serif; font-weight: 600; transition: background 0.2s; text-decoration: none; display: inline-block; }
+  .btn-primary:hover { background: var(--tan-light); }
+  .btn-outline-lt { background: transparent; color: rgba(255,255,255,0.75); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 1rem 2rem; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; font-family: 'Inter', sans-serif; transition: border-color 0.2s, color 0.2s; text-decoration: none; display: inline-block; }
+  .btn-outline-lt:hover { border-color: var(--tan); color: var(--tan); }
+  .hero-dots { position: absolute; bottom: 2.5rem; right: 3rem; display: flex; gap: 0.5rem; z-index: 2; }
+  .hero-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: background 0.2s; border: none; }
+  .hero-dot.active { background: var(--tan); }
+
+  /* STATS */
+  .stats { background: var(--black); display: grid; grid-template-columns: repeat(4, 1fr); }
+  .stat { padding: 2rem 2rem; border-right: 1px solid rgba(203,180,146,0.12); text-align: center; }
+  .stat:last-child { border-right: none; }
+  .stat-val { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 400; color: var(--tan); line-height: 1; }
+  .stat-label { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 0.35rem; }
+
+  /* SHARED */
+  section { padding: 6rem 3rem; }
+  .section-label { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--tan); margin-bottom: 0.75rem; }
+  .section-heading { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 400; line-height: 1.15; color: var(--black); }
+  .section-body { font-size: 0.9rem; color: var(--body); line-height: 1.85; margin-top: 1.25rem; }
+  .tan-rule { width: 2.5rem; height: 2px; background: var(--tan); margin: 1.5rem 0; }
+
+  /* ABOUT */
+  .about { background: var(--white); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .about-img-stack { position: relative; }
+  .about-img-main { width: 100%; aspect-ratio: 4/3; overflow: hidden; }
+  .about-img-main img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .about-img-secondary { position: absolute; bottom: -2rem; right: -2rem; width: 55%; aspect-ratio: 4/3; overflow: hidden; border: 4px solid var(--white); }
+  .about-img-secondary img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .lsu-badge { position: absolute; top: -1.5rem; left: -1.5rem; background: var(--black); padding: 1.25rem 1.5rem; text-align: center; }
+  .lsu-badge-val { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 400; color: var(--tan); line-height: 1; }
+  .lsu-badge-label { font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-top: 0.25rem; }
+  .testimonial-box { background: var(--tan-pale); border-left: 3px solid var(--tan); padding: 1.5rem; margin-top: 2.5rem; }
+  .testimonial-text { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-style: italic; color: var(--black); line-height: 1.7; }
+  .testimonial-attr { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--warm-gray); margin-top: 0.75rem; }
+
+  /* AMENITIES */
+  .amenities { background: var(--offwhite); }
+  .amenities-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-top: 3rem; }
+  .amenity-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .amenity-col-title { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--tan); margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--offwhite-mid); }
+  .amenity-list { list-style: none; }
+  .amenity-list li { font-size: 0.85rem; color: var(--body); padding: 0.55rem 0; border-bottom: 1px solid var(--offwhite-mid); display: flex; align-items: center; gap: 0.6rem; }
+  .amenity-list li::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--tan); flex-shrink: 0; }
+  .amenity-col:first-child { padding-right: 2rem; border-right: 1px solid var(--offwhite-mid); }
+  .amenity-col:last-child { padding-left: 2rem; }
+  .amenity-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  .amenity-photo { overflow: hidden; }
+  .amenity-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .amenity-photo.tall { aspect-ratio: 2/3; grid-row: span 2; }
+  .amenity-photo.sq { aspect-ratio: 1; }
+
+  /* GALLERY */
+  .gallery { background: var(--black-deep); padding: 6rem 3rem; }
+  .gallery-heading { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3vw, 2.8rem); font-weight: 400; color: var(--white); margin-bottom: 2.5rem; }
+  .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 220px; gap: 0.75rem; }
+  .g-item { overflow: hidden; }
+  .g-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+  .g-item:hover img { transform: scale(1.05); }
+  .g-item.wide { grid-column: span 2; }
+  .g-item.tall { grid-row: span 2; }
+
+  /* FLOOR PLANS */
+  .floorplans { background: var(--offwhite-mid); }
+  .plans-tabs { display: flex; border-bottom: 1px solid rgba(26,26,26,0.12); margin-top: 3rem; margin-bottom: 2rem; }
+  .plan-tab { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--warm-gray); padding: 0.75rem 1.5rem; cursor: pointer; border-bottom: 2px solid transparent; background: transparent; border-top: none; border-left: none; border-right: none; transition: color 0.2s, border-color 0.2s; font-family: 'Inter', sans-serif; }
+  .plan-tab.active { color: var(--black); border-bottom-color: var(--tan); }
+  .plans-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .plan-card { background: var(--white); overflow: hidden; transition: box-shadow 0.2s; }
+  .plan-card:hover { box-shadow: 0 8px 32px rgba(26,26,26,0.1); }
+  .plan-card.hidden { display: none; }
+  .plan-card-top { background: var(--black); padding: 1.25rem 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+  .plan-card-name { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 400; color: var(--white); }
+  .plan-tag { font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--tan); border: 1px solid rgba(203,180,146,0.4); padding: 0.2rem 0.6rem; }
+  .plan-img { width: 100%; overflow: hidden; background: var(--tan-pale); display: flex; align-items: center; justify-content: center; min-height: 180px; }
+  .plan-img img { width: 100%; display: block; }
+  .plan-body { padding: 1.5rem; }
+  .plan-price { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 400; color: var(--black); }
+  .plan-sqft { font-size: 0.78rem; color: var(--warm-gray); margin-top: 0.25rem; }
+  .plan-cta { display: block; width: 100%; text-align: center; background: var(--tan-pale); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--black); padding: 0.85rem; border: none; cursor: pointer; font-family: 'Inter', sans-serif; margin-top: 1.25rem; transition: background 0.2s, color 0.2s; text-decoration: none; }
+  .plan-cta:hover { background: var(--tan); color: var(--black-deep); }
+  .plans-cta { text-align: center; margin-top: 3rem; }
+
+  /* CONTACT */
+  .contact { background: var(--black-deep); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
+  .contact-form input, .contact-form textarea { width: 100%; background: rgba(255,255,255,0.05); border: none; border-bottom: 1px solid rgba(203,180,146,0.2); padding: 0.9rem 0.5rem; font-size: 0.9rem; font-family: 'Inter', sans-serif; color: var(--white); outline: none; transition: border-color 0.2s; margin-bottom: 1.25rem; display: block; }
+  .contact-form input:focus, .contact-form textarea:focus { border-bottom-color: var(--tan); }
+  .contact-form input::placeholder, .contact-form textarea::placeholder { color: rgba(203,180,146,0.3); }
+  .contact-form textarea { resize: none; height: 100px; }
+  .ci-row { display: flex; gap: 1rem; align-items: flex-start; padding: 1.5rem 0; border-bottom: 1px solid rgba(203,180,146,0.08); }
+  .ci-row:first-child { padding-top: 0; }
+  .ci-row:last-child { border-bottom: none; }
+  .ci-dot { width: 6px; height: 6px; background: var(--tan); border-radius: 50%; margin-top: 0.45rem; flex-shrink: 0; }
+  .ci-label { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--tan); margin-bottom: 0.3rem; }
+  .ci-val { font-size: 0.9rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+  .ci-val a { color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.2s; }
+  .ci-val a:hover { color: var(--tan-light); }
+
+  /* FOOTER */
+  footer { background: #0A0A0A; padding: 2.5rem 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
+  .footer-logo img { height: 44px; opacity: 0.7; display: block; }
+  .footer-links { display: flex; gap: 2rem; list-style: none; flex-wrap: wrap; }
+  .footer-links a { font-size: 0.67rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(203,180,146,0.3); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--tan-light); }
+  .footer-copy { font-size: 0.67rem; color: rgba(255,255,255,0.18); }
+
+  /* RESPONSIVE */
+  @media (max-width: 960px) {
+    nav { padding: 1rem 1.5rem; }
+    nav.scrolled { padding: 0.8rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .gallery { padding: 4rem 1.5rem; }
+    .hero-content { padding: 0 1.5rem 4rem; }
+    .stats { grid-template-columns: 1fr 1fr; }
+    .stat:nth-child(2) { border-right: none; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .about-img-stack { margin-bottom: 3rem; }
+    .about-img-secondary { bottom: -1rem; right: -0.5rem; }
+    .amenities-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; }
+    .plans-grid { grid-template-columns: 1fr 1fr; }
+    .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    footer { flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 560px) {
+    .plans-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .g-item.wide, .g-item.tall { grid-column: span 1; grid-row: span 1; }
+    .amenity-cols { grid-template-columns: 1fr; }
+    .amenity-col:first-child { padding-right: 0; border-right: none; padding-bottom: 1.5rem; border-bottom: 1px solid var(--offwhite-mid); }
+    .amenity-col:last-child { padding-left: 0; padding-top: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="sitenav">
+  <a href="#home" class="nav-logo">
+    <img src="logo.png" alt="5 East Apartments">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#amenities">Amenities</a></li>
+    <li><a href="#floorplans">Floor Plans</a></li>
+    <li><a href="#gallery">Photos</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="https://passport.appf.io/sign_in?idp_type=tportal&vhostless=true&waldo=true" target="_blank" rel="noopener" class="btn-nav btn-ghost">Resident Portal</a>
+    <a href="https://greengate.appfolio.com/listings?filters%5Bproperty_list%5D=PDP" target="_blank" rel="noopener" class="btn-nav btn-tan">Apply Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-slideshow">
+    <div class="hero-slide active"><img src="hero-1.jpg" alt="5 East Apartments exterior"></div>
+    <div class="hero-slide"><img src="hero-2.jpg" alt="5 East Apartments community"></div>
+    <div class="hero-slide"><img src="hero-3.jpg" alt="5 East Apartments interior"></div>
+  </div>
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Baton Rouge, Louisiana &nbsp;&middot;&nbsp; 3 Miles from LSU</p>
+    <h1 class="hero-headline">
+      Life east of<br>
+      <span class="num">ordinary.</span>
+    </h1>
+    <p class="hero-sub">Stylish 1, 2, and 3-bedroom apartments just 3 miles from LSU &mdash; surrounded by dining, shopping, and everything you need.</p>
+    <div class="hero-ctas">
+      <a href="#floorplans" class="btn-primary">View Floor Plans</a>
+      <a href="#contact" class="btn-outline-lt">Schedule a Tour</a>
+      <a href="https://youtube.com/playlist?list=PLPNB_I8iBT0_Cew3Hs9STlz_Y2a5i6kDg" target="_blank" rel="noopener" class="btn-outline-lt">Virtual Tours &nearr;</a>
+    </div>
+  </div>
+  <div class="hero-dots" aria-hidden="true">
+    <button class="hero-dot active" data-slide="0"></button>
+    <button class="hero-dot" data-slide="1"></button>
+    <button class="hero-dot" data-slide="2"></button>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="stat-val">6</div><div class="stat-label">Floor Plans</div></div>
+  <div class="stat"><div class="stat-val">1&ndash;3</div><div class="stat-label">Bedrooms</div></div>
+  <div class="stat"><div class="stat-val">3 mi</div><div class="stat-label">From LSU</div></div>
+  <div class="stat"><div class="stat-val">$875</div><div class="stat-label">Starting From</div></div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="about-img-stack">
+      <div class="about-img-main">
+        <img src="about-1.jpg" alt="5 East community exterior">
+      </div>
+      <div class="about-img-secondary">
+        <img src="about-2.jpg" alt="5 East apartment interior">
+      </div>
+      <div class="lsu-badge">
+        <div class="lsu-badge-val">3 mi</div>
+        <div class="lsu-badge-label">From LSU</div>
+      </div>
+    </div>
+    <div>
+      <p class="section-label">Our Community</p>
+      <h2 class="section-heading">Personal privacy, effortless convenience</h2>
+      <div class="tan-rule"></div>
+      <p class="section-body">5 East Apartment Homes offer the pleasure of personal privacy combined with convenience. With stylish one, two and three bedroom apartments available, 5 East is the premier experience of residential life in Baton Rouge.</p>
+      <p class="section-body" style="margin-top: 1rem;">Located only 3 miles from the LSU campus and nestled between multiple shopping and dining locations, our community allows for both a city and neighborhood lifestyle.</p>
+      <div class="testimonial-box">
+        <p class="testimonial-text">"Currently signing my third year lease with them &amp; couldn't be happier. They truly care about their tenants."</p>
+        <p class="testimonial-attr">Verified Resident &nbsp;&middot;&nbsp; Google Reviews</p>
+      </div>
+      <a href="#amenities" class="btn-primary" style="margin-top: 2.5rem;">Explore Amenities</a>
+    </div>
+  </div>
+</section>
+
+<!-- AMENITIES -->
+<section class="amenities" id="amenities">
+  <p class="section-label">What's Included</p>
+  <h2 class="section-heading">Community &amp; Apartment Amenities</h2>
+  <div class="amenities-grid">
+    <div class="amenity-cols">
+      <div class="amenity-col">
+        <div class="amenity-col-title">Community</div>
+        <ul class="amenity-list">
+          <li>Pool</li>
+          <li>Fitness Center</li>
+          <li>BBQ / Picnic Area</li>
+          <li>Courtyard</li>
+          <li>Clubhouse &amp; Free WiFi</li>
+          <li>Basketball Court</li>
+          <li>Business Center</li>
+          <li>Pet Park</li>
+          <li>Sundeck</li>
+          <li>On-Site Maintenance</li>
+          <li>On-Site Management</li>
+          <li>Laundry Facilities</li>
+        </ul>
+      </div>
+      <div class="amenity-col">
+        <div class="amenity-col-title">Apartment</div>
+        <ul class="amenity-list">
+          <li>Hardwood Look Floors**</li>
+          <li>W/D Hookup**</li>
+          <li>Washer/Dryer In Unit*</li>
+          <li>Dishwasher</li>
+          <li>Patio / Balcony with View</li>
+          <li>Air Conditioner</li>
+          <li>Electronic Thermostat</li>
+          <li>Cox Cable Ready</li>
+          <li>Black or SS Appliances*</li>
+          <li>White Appliances (std)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="amenity-photos">
+      <div class="amenity-photo tall">
+        <img src="amenity-1.jpg" alt="5 East community pool area">
+      </div>
+      <div class="amenity-photo sq">
+        <img src="amenity-2.jpg" alt="5 East apartment interior">
+      </div>
+      <div class="amenity-photo sq">
+        <img src="gallery-1.jpg" alt="5 East community">
+      </div>
+    </div>
+  </div>
+  <p style="font-size:0.72rem; color:var(--warm-gray); margin-top:2rem;">* Available upon request &nbsp;&nbsp; ** Available in select units</p>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <p class="section-label" style="color:var(--tan);">Photo Gallery</p>
+  <h2 class="gallery-heading">See the Community</h2>
+  <div class="gallery-grid">
+    <div class="g-item wide tall"><img src="gallery-3.jpg" alt="5 East exterior"></div>
+    <div class="g-item"><img src="gallery-2.jpg" alt="5 East interior"></div>
+    <div class="g-item"><img src="gallery-4.jpg" alt="5 East community"></div>
+    <div class="g-item wide"><img src="gallery-5.jpg" alt="5 East apartment"></div>
+    <div class="g-item"><img src="gallery-6.jpg" alt="5 East amenity"></div>
+    <div class="g-item"><img src="gallery-7.jpg" alt="5 East bedroom"></div>
+    <div class="g-item wide"><img src="gallery-8.jpg" alt="5 East living area"></div>
+    <div class="g-item"><img src="gallery-9.jpg" alt="5 East kitchen"></div>
+  </div>
+</section>
+
+<!-- FLOOR PLANS -->
+<section class="floorplans" id="floorplans">
+  <p class="section-label">Find Your Home</p>
+  <h2 class="section-heading">Six Floor Plans to Choose From</h2>
+  <div class="plans-tabs" role="tablist">
+    <button class="plan-tab active" data-filter="all">All</button>
+    <button class="plan-tab" data-filter="1">1 Bedroom</button>
+    <button class="plan-tab" data-filter="2">2 Bedroom</button>
+    <button class="plan-tab" data-filter="3">3 Bedroom</button>
+  </div>
+  <div class="plans-grid">
+    <div class="plan-card" data-beds="1">
+      <div class="plan-card-top"><div class="plan-card-name">1 Bed &nbsp;&middot;&nbsp; 1.5 Bath</div><div class="plan-tag">Plan A</div></div>
+      <div class="plan-img"><img src="plan-a.png" alt="Plan A floor plan"></div>
+      <div class="plan-body">
+        <div class="plan-price">From $875 <span style="font-size:0.8rem;color:var(--warm-gray);font-family:'Inter',sans-serif;font-weight:300;">/mo</span></div>
+        <div class="plan-sqft">663 sq ft</div>
+        <a href="https://greengate.appfolio.com/listings?filters%5Bproperty_list%5D=PDP" target="_blank" rel="noopener" class="plan-cta">Check Availability &rarr;</a>
+      </div>
+    </div>
+    <div class="plan-card" data-beds="1">
+      <div class="plan-card-top"><div class="plan-card-name">1 Bed &nbsp;&middot;&nbsp; 1 Bath</div><div class="plan-tag">Plan B</div></div>
+      <div class="plan-img"><img src="plan-b.jpg" alt="Plan B floor plan"></div>
+      <div class="plan-body">
+        <div class="plan-price">From $925 <span style="font-size:0.8rem;color:var(--warm-gray);font-family:'Inter',sans-serif;font-weight:300;">/mo</span></div>
+        <div class="plan-sqft">663 sq ft</div>
+        <a href="https://greengate.appfolio.com/listings?filters%5Bproperty_list%5D=PDP" target="_blank" rel="noopener" class="plan-cta">Check Availability &rarr;</a>
+      </div>
+    </div>
+    <div class="plan-card" data-beds="2">
+      <div class="plan-card-top"><div class="plan-card-name">2 Bed &nbsp;&middot;&nbsp; 1 Bath</div><div class="plan-tag">Plan C</div></div>
+      <div class="plan-img"><img src="plan-c.jpg" alt="Plan C floor plan"></div>
+      <div class="plan-body">
+        <div class="plan-price">From $1,045 <span style="font-size:0.8rem;color:var(--warm-gray);font-family:'Inter',sans-serif;font-weight:300;">/mo</span></div>
+        <div class="plan-sqft">863 sq ft</div>
+        <a href="https://greengate.appfolio.com/listings?filters%5Bproperty_list%5D=PDP" target="_blank" rel="noopener" class="plan-cta">Check Availability &rarr;</a>
+      </div>
+    </div>
+    <div class="plan-card" data-beds="2">
+      <div class="plan-card-top"><div class="plan-card-name">2 Bed &nbsp;&middot;&nbsp; 1.5 Bath</div><div class="plan-tag">Plan D</div></div>
+      <div class="plan-img"><img src="plan-d.jpg" alt="Plan D floor plan"></div>
+      <div class="plan-body">
+        <div class="plan-price">From $1,095 <span style="font-size:0.8rem;color:var(--warm-gray);font-family:'Inter',sans-serif;font-weight:300;">/mo</span></div>
+        <div class="plan-sqft">936 sq ft</div>
+        <a href="https://greengate.appfolio.com/listings?filters%5Bproperty_list%5D=PDP" target="_blank" rel="noopener" class="plan-cta">Check Availability &rarr;</a>
+      </div>
+    </div>
+    <div class="plan-card" data-beds="2">
+      <div class="plan-card-top"><div class="plan-card-name">2 Bed &nbsp;&middot;&nbsp; 2 Bath</div><div class="plan-tag">Plan E</div></div>
+      <div class="plan-img"><img src="plan-e.jpg" alt="Plan E floor plan"></div>
+      <div class="plan-body">
+        <div class="plan-price">From $1,175 <span style="font-size:0.8rem;color:var(--warm-gray);font-family:'Inter',sans-serif;font-weight:300;">/mo</span></div>
+        <div class="plan-sqft">936 sq ft</div>
+        <a href="https://greengate.appfolio.com/listings?filters%5Bproperty_list%5D=PDP" target="_blank" rel="noopener" class="plan-cta">Check Availability &rarr;</a>
+      </div>
+    </div>
+    <div class="plan-card" data-beds="3">
+      <div class="plan-card-top"><div class="plan-card-name">3 Bed &nbsp;&middot;&nbsp; 2 Bath</div><div class="plan-tag">Plan F</div></div>
+      <div class="plan-img"><img src="plan-f.jpg" alt="Plan F floor plan"></div>
+      <div class="plan-body">
+        <div class="plan-price">From $1,260 <span style="font-size:0.8rem;color:var(--warm-gray);font-family:'Inter',sans-serif;font-weight:300;">/mo</span></div>
+        <div class="plan-sqft">1,136 sq ft</div>
+        <a href="https://greengate.appfolio.com/listings?filters%5Bproperty_list%5D=PDP" target="_blank" rel="noopener" class="plan-cta">Check Availability &rarr;</a>
+      </div>
+    </div>
+  </div>
+  <div class="plans-cta">
+    <a href="https://greengate.appfolio.com/listings?filters%5Bproperty_list%5D=PDP" target="_blank" rel="noopener" class="btn-primary">Apply Now</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-grid">
+    <div>
+      <p class="section-label" style="color:var(--tan);">Get in Touch</p>
+      <h2 class="section-heading" style="color:var(--white);">Ready to make 5 East home?</h2>
+      <div class="tan-rule"></div>
+      <div style="margin-top:2rem;">
+        <div class="ci-row"><div class="ci-dot"></div><div><div class="ci-label">Address</div><div class="ci-val">550 Lee Drive<br>Baton Rouge, LA 70808</div></div></div>
+        <div class="ci-row"><div class="ci-dot"></div><div><div class="ci-label">Phone</div><div class="ci-val"><a href="tel:+12257667380">(225) 766-7380</a></div></div></div>
+        <div class="ci-row"><div class="ci-dot"></div><div><div class="ci-label">Email</div><div class="ci-val"><a href="mailto:pdpmanager@greengatemanagement.com">pdpmanager@greengatemanagement.com</a></div></div></div>
+        <div class="ci-row"><div class="ci-dot"></div><div><div class="ci-label">Hours</div><div class="ci-val">Monday &ndash; Friday, 9am &ndash; 5pm<br><span style="font-size:0.8rem;opacity:0.6;">*Photo ID required to tour</span></div></div></div>
+      </div>
+    </div>
+    <div>
+      <!-- KNOCK WIDGET: replace this form with your Knock embed snippet -->
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <input type="text" name="first_name" placeholder="First Name" required>
+        <input type="text" name="last_name" placeholder="Last Name" required>
+        <input type="email" name="email" placeholder="Email Address" required>
+        <input type="tel" name="phone" placeholder="Phone Number">
+        <input type="text" name="subject" placeholder="Subject">
+        <textarea name="message" placeholder="Your message..."></textarea>
+        <button type="submit" class="btn-primary" style="width:100%;">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#home" class="footer-logo">
+    <img src="logo.png" alt="5 East Apartments">
+  </a>
+  <ul class="footer-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#amenities">Amenities</a></li>
+    <li><a href="#floorplans">Floor Plans</a></li>
+    <li><a href="#gallery">Photos</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="footer-copy">&copy; 2026 Greengate Management, LLC</div>
+</footer>
+
+<script>
+  /* Sticky nav */
+  const nav = document.getElementById('sitenav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+
+  /* Smooth scroll */
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+
+  /* Hero slideshow */
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.hero-dot');
+  let current = 0;
+  let timer = setInterval(nextSlide, 4000);
+  function goToSlide(n) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = n;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+  }
+  function nextSlide() { goToSlide((current + 1) % slides.length); }
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      clearInterval(timer);
+      goToSlide(parseInt(dot.dataset.slide));
+      timer = setInterval(nextSlide, 4000);
+    });
+  });
+
+  /* Floor plan filter */
+  document.querySelectorAll('.plan-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.plan-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const f = tab.dataset.filter;
+      document.querySelectorAll('.plan-card').forEach(c => c.classList.toggle('hidden', f !== 'all' && c.dataset.beds !== f));
+    });
+  });
+
+  /* Contact form */
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type="submit"]');
+    const original = btn.textContent;
+    btn.textContent = 'Sent \u2713';
+    btn.style.opacity = '0.7';
+    setTimeout(() => { btn.textContent = original; btn.style.opacity = ''; e.target.reset(); }, 3000);
+  }
+</script>
+</body>
+</html>
